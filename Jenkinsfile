@@ -13,7 +13,7 @@ pipeline{
     
      stage('build image'){
       steps {
-          sh 'docker build . -f Dockerfile -t amrbumadian/sprints_deploying_django:latest'
+          sh 'docker build . -f Dockerfile -t amrbumadian/booster_django_app:latest'
         }
      }
     
@@ -24,14 +24,14 @@ pipeline{
                     
                     sh """
                       docker login -u ${USERNAME} -p ${PASSWORD}
-                      docker push amrbumadian/sprints_deploying_django:latest
+                      docker push amrbumadian/booster_django_app:latest
                     """
                 }
             }
         }
      stage('deploy'){
             steps {
-                sh 'docker run -d -p 9000:9000 amrbumadian/sprints_deploying_django:latest'
+                sh 'docker run -d -p 9000:9000 amrbumadian/booster_django_app:latest'
             }
            post {
               success {
